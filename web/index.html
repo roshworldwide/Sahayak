@@ -60,6 +60,11 @@
         <span class="tile-badge" id="learn-badge" hidden></span>
         <span class="ms chev" aria-hidden="true">chevron_right</span>
       </button>
+      <button class="tile tile-story" data-go="learn" type="button">
+        <span class="tile-icon" aria-hidden="true"><span class="ms">phone_in_talk</span></span>
+        <span class="tile-text"><span class="tile-title" data-i18n="story_title"></span><span class="tile-sub" data-i18n="story_tile_sub"></span></span>
+        <span class="ms chev" aria-hidden="true">chevron_right</span>
+      </button>
     </div>
     <div class="tiles">
       <a class="tile tile-help" href="tel:1930">
@@ -264,11 +269,18 @@
 
   <!-- SPOT THE SCAM: the awareness game -->
   <section class="screen" data-screen="learn" hidden>
-    <h1 class="large-title" data-i18n="tile_learn"></h1>
-    <p class="sub" data-i18n="learn_sub"></p>
+    <h1 class="large-title" data-i18n="tab_learn"></h1>
     <div id="level-card" class="level-card"></div>
+    <h3 class="game-head"><span class="game-mark gm-story" aria-hidden="true"><span class="ms">phone_in_talk</span></span><span data-i18n="story_title"></span></h3>
+    <p class="sub game-sub" data-i18n="story_sub"></p>
+    <div id="episodes" class="episodes"></div>
+    <p class="story-saved" id="story-saved" hidden></p>
+    <h3 class="game-head"><span class="game-mark gm-spot" aria-hidden="true"><span class="ms">emoji_events</span></span><span data-i18n="tile_learn"></span></h3>
+    <p class="sub game-sub" data-i18n="learn_sub"></p>
     <button id="btn-play" class="primary big" type="button"><span class="ms" aria-hidden="true">play_arrow</span><span data-i18n="play_round"></span></button>
     <div id="daily-card" class="daily-card"></div>
+    <h3 class="book-head"><span data-i18n="tricks_title"></span><span class="count" id="tricks-count"></span></h3>
+    <div id="tricks" class="tricks"></div>
     <h3 data-i18n="badges_title"></h3>
     <div id="badges" class="badges"></div>
     <p class="fine" data-i18n="game_private"></p>
@@ -300,6 +312,35 @@
     <div class="cta-row">
       <button id="btn-play-again" class="primary wide" type="button"><span class="ms" aria-hidden="true">refresh</span><span data-i18n="play_again"></span></button>
       <button id="btn-game-share" class="tinted wide" type="button"><span class="ms" aria-hidden="true">share</span><span data-i18n="share_game"></span></button>
+      <button class="secondary wide" data-go="learn" type="button"><span data-i18n="done_btn"></span></button>
+    </div>
+  </section>
+
+  <!-- BEAT THE SCAMMER: a scam played out as a call or a chat -->
+  <section class="screen" data-screen="story" hidden>
+    <div class="story-head">
+      <button class="back" id="btn-story-quit" type="button" data-i18n-label="back"><span class="ms" aria-hidden="true">close</span></button>
+      <div class="story-who">
+        <span class="story-avatar" id="story-avatar" aria-hidden="true"></span>
+        <div class="story-who-text"><b id="story-from" dir="auto"></b><span id="story-status"></span></div>
+      </div>
+      <div class="shields" id="story-shields"></div>
+    </div>
+    <div class="balance" id="story-balance"></div>
+    <div class="chat" id="story-chat" role="log" aria-live="polite"></div>
+    <div class="choices" id="story-choices"></div>
+  </section>
+
+  <section class="screen" data-screen="story-done" hidden>
+    <div class="stars-big" id="story-stars"></div>
+    <h2 id="story-done-title" class="done-title" tabindex="-1"></h2>
+    <p id="story-done-sub" class="sub done-sub"></p>
+    <span id="story-points" class="done-points" hidden></span>
+    <div id="story-cards" class="story-cards"></div>
+    <p class="story-total" id="story-total"></p>
+    <div class="cta-row">
+      <button id="btn-story-next" class="primary wide" type="button"><span data-i18n="story_next"></span><span class="ms" aria-hidden="true">arrow_forward</span></button>
+      <button id="btn-story-again" class="tinted wide" type="button"><span class="ms" aria-hidden="true">refresh</span><span data-i18n="story_again"></span></button>
       <button class="secondary wide" data-go="learn" type="button"><span data-i18n="done_btn"></span></button>
     </div>
   </section>

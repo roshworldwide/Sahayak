@@ -151,7 +151,7 @@ body {
   -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
 }
-body[data-at="play"] { padding-bottom: env(safe-area-inset-bottom); }
+body[data-at="play"], body[data-at="story"] { padding-bottom: env(safe-area-inset-bottom); }
 /* Indian and Perso-Arabic scripts: no tracking (it breaks joined letters), and room for their marks */
 :lang(hi), :lang(as), :lang(bn), :lang(brx), :lang(doi), :lang(gu), :lang(kn), :lang(ks), :lang(kok), :lang(mai), :lang(ml), :lang(mni), :lang(mr), :lang(ne), :lang(or), :lang(pa), :lang(sa), :lang(sat), :lang(sd), :lang(ta), :lang(te), :lang(ur) { --trk-large: 0; letter-spacing: 0; }
 :lang(en) { --trk-large: .012em; letter-spacing: -.01em; }
@@ -274,7 +274,7 @@ p { text-wrap: pretty; }
 .tab[aria-current="page"] { color: var(--tint); }
 .tab[aria-current="page"] .ms { font-variation-settings: "FILL" 1, "wght" 500; }
 .tab:active .ms { opacity: .5; }
-body[data-at="play"] .tabbar { display: none; }
+body[data-at="play"] .tabbar, body[data-at="story"] .tabbar { display: none; }
 
 /* ---------------------------------------------------------------- layout and type */
 main { max-width: 600px; margin: 0 auto; padding: 8px 16px 24px; }
@@ -365,6 +365,7 @@ main { max-width: 600px; margin: 0 auto; padding: 8px 16px 24px; }
 .tile-shield .tile-icon { background: var(--tint-fill); }
 .tile-rupee .tile-icon { background: var(--green-fill); }
 .tile-learn .tile-icon { background: var(--orange); }
+.tile-story .tile-icon { background: var(--purple); }
 .tile-help .tile-icon { background: var(--red); }
 .tile-install .tile-icon { background: var(--gray); }
 .tile-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
@@ -848,7 +849,7 @@ details.group[open] > summary::after { transform: rotate(90deg); }
 .foot::before { content: "lock"; font: normal 15px/1 var(--icons); font-variation-settings: "FILL" 1, "wght" 400; }
 .foot > span:first-of-type { flex-basis: 100%; }
 #pack-version { font-size: .75rem; }
-body[data-at="play"] .foot { display: none; }
+body[data-at="play"] .foot, body[data-at="story"] .foot { display: none; }
 
 /* ================================================================ SPOT THE SCAM: the awareness game */
 /* ---- the level, as a ring */
@@ -1295,6 +1296,162 @@ section[data-screen="home"] > :not(.intro) { position: relative; z-index: 1; }  
 }
 :root[data-theme="titanium"] .live-shield i { border-color: rgba(120, 108, 90, .55); }
 @keyframes titanium-glint { 0%, 72% { background-position: 120% 0; } 100% { background-position: -30% 0; } }
+
+/* ================================================================ BEAT THE SCAMMER: the second game */
+/* ---- on the Learn tab: two games, each with its own heading */
+.game-head { display: flex; align-items: center; gap: 10px; margin-top: 30px !important; }
+.game-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; color: #FFFFFF; flex: none; }
+.game-mark .ms { font-size: 20px; font-variation-settings: "FILL" 1, "wght" 500; }
+.gm-story { background: var(--purple); }
+.gm-spot { background: var(--orange); }
+.game-sub { margin: -2px 4px 12px !important; font-size: .9375rem !important; }
+.episodes { border-radius: var(--r-card); background: var(--card); overflow: hidden; box-shadow: var(--card-ring); }
+.ep-row {
+  position: relative; display: flex; align-items: center; gap: 14px; width: 100%; min-height: 70px; padding: 10px 12px 10px 16px;
+  border: 0; background: none; color: var(--label); text-align: start;
+}
+[dir="rtl"] .ep-row { padding: 10px 16px 10px 12px; }
+.ep-row + .ep-row::before {
+  content: ""; position: absolute; top: 0; inset-inline-start: 74px; inset-inline-end: 0; height: 1px;
+  background: var(--sep); transform: scaleY(.5); transform-origin: top;
+}
+.ep-row:active:not([disabled]) { background: var(--press); }
+.ep-row.locked { cursor: default; }
+.ep-row.locked .ep-title { color: var(--label-2); }
+.ep-num {
+  flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 22px; color: #FFFFFF; background: var(--purple);
+}
+.ep-num .ms { font-size: 24px; font-variation-settings: "FILL" 1, "wght" 500; }
+.ep-num.ch-call, .story-avatar.ch-call { background: var(--green-fill); }
+.ep-num.ch-video, .story-avatar.ch-video { background: var(--red); }
+.ep-num.ch-sms, .story-avatar.ch-sms { background: var(--tint-fill); }
+.ep-num.ch-whatsapp, .story-avatar.ch-whatsapp { background: var(--teal); }
+.ep-row.locked .ep-num { background: var(--fill-2); color: var(--label-3); }
+.ep-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.ep-over { font-size: .75rem; font-weight: 600; color: var(--purple-ink); }
+.ep-title { font-size: 1.0625rem; font-weight: 600; line-height: 1.3; }
+.ep-lock { font-size: .8125rem; color: var(--label-2); }
+.stars { display: inline-flex; gap: 1px; margin-top: 2px; }
+.stars .ms { font-size: 18px; font-variation-settings: "FILL" 1, "wght" 500; }
+.stars .on { color: var(--yellow); filter: drop-shadow(0 1px 0 rgba(150, 100, 0, .35)); }
+.stars .off { color: var(--fill); }
+.story-saved {
+  display: flex; align-items: center; gap: 8px; margin: 10px 4px 0; font-size: .9375rem; font-weight: 600; color: var(--green-ink);
+}
+.story-saved::before { content: "savings"; font: normal 22px/1 var(--icons); font-variation-settings: "FILL" 1, "wght" 400; color: var(--green); }
+
+/* ---- the Trick Book: cards to collect */
+.book-head { display: flex; align-items: center; gap: 8px; }
+.book-head .count { display: inline-grid; place-items: center; min-width: 26px; height: 24px; padding: 0 9px; border-radius: 12px; background: var(--fill-3); color: var(--label-2); font: 600 .8125rem/1 var(--font); }
+.tricks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; perspective: 800px; }
+.trick {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 104px; padding: 12px 6px;
+  border: 0; border-radius: 16px; background: var(--card); color: var(--label-2); text-align: center; box-shadow: var(--card-ring);
+}
+.trick.open { color: var(--label); }
+.trick.flip { animation: card-flip .6s var(--ease-ios); }
+@keyframes card-flip { 0% { transform: rotateY(0); } 50% { transform: rotateY(90deg); } 100% { transform: rotateY(0); } }
+.trick-name { font-size: .8125rem; font-weight: 600; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.trick-icon {
+  flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: var(--fill-3); color: var(--label-3);
+}
+.trick-icon .ms { font-size: 26px; font-variation-settings: "FILL" 1, "wght" 500; }
+.trick.open .trick-icon, .stop-trick .trick-icon, .trick-card .trick-icon { color: #FFFFFF; background: var(--purple); }
+.tk-authority { --tk: var(--tint-fill); } .tk-urgency { --tk: var(--orange); } .tk-otp { --tk: var(--indigo); }
+.tk-fear { --tk: var(--red); } .tk-remote_app { --tk: var(--teal); } .tk-fee { --tk: var(--green-fill); }
+.tk-greed { --tk: var(--pink); } .tk-secrecy { --tk: #8E8E93; } .tk-video_arrest { --tk: var(--red-fill); }
+.tk-emotion { --tk: var(--pink); } .tk-qr_pin { --tk: var(--indigo); } .tk-fake_payment { --tk: var(--orange-ink); }
+.trick.open .trick-icon, .stop-trick .trick-icon, .trick-card .trick-icon { background: var(--tk, var(--purple)); }
+
+/* ---- the scene: a call or a chat, as the phone would show it */
+.story-head { display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px; min-height: 52px; }
+.story-head .back { margin: 0; padding: 0; width: 32px; height: 32px; justify-content: center; border-radius: 16px; background: var(--fill-3); color: var(--label-2); }
+.story-head .back .ms { font-size: 22px; margin: 0; font-variation-settings: "FILL" 0, "wght" 600; }
+.story-who { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.story-avatar { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 20px; color: #FFFFFF; }
+.story-avatar .ms { font-size: 22px; font-variation-settings: "FILL" 1, "wght" 500; }
+.story-avatar.ch-call, .story-avatar.ch-video { animation: ringing 2s var(--ease) infinite; }
+@keyframes ringing { 0%, 100% { box-shadow: 0 0 0 0 rgba(52, 199, 89, .5); } 60% { box-shadow: 0 0 0 9px rgba(52, 199, 89, 0); } }
+.story-who-text { display: flex; flex-direction: column; min-width: 0; }
+.story-who-text b { font-size: 1rem; font-weight: 600; line-height: 1.25; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.story-who-text span { font-size: .8125rem; color: var(--label-2); font-variant-numeric: tabular-nums; }
+.shields { display: flex; gap: 2px; }
+.shields .ms { font-size: 22px; font-variation-settings: "FILL" 1, "wght" 500; transition: color .3s, transform .3s var(--spring); }
+.shields .on { color: var(--tint); }
+.shields .off { color: var(--fill); transform: scale(.85); }
+.shields.hit { animation: shake .45s var(--ease); }
+.balance {
+  display: flex; align-items: center; justify-content: space-between; margin: 10px 0 4px; padding: 10px 14px; border-radius: 14px;
+  background: var(--green-soft); color: var(--green-ink); font-size: .875rem; font-weight: 600;
+}
+.balance b { font: 700 1.125rem/1 var(--display); font-variant-numeric: tabular-nums; }
+.balance.hit { animation: balance-hit .9s var(--ease); }
+@keyframes balance-hit { 0%, 100% { background: var(--green-soft); transform: none; } 15%, 45% { background: var(--red-soft); color: var(--red-ink); transform: translateX(-5px); } 30% { transform: translateX(5px); } }
+.chat { display: flex; flex-direction: column; gap: 8px; padding: 12px 0 8px; min-height: 120px; }
+.msg {
+  max-width: 82%; padding: 9px 14px; border-radius: 19px; font-size: 1.0625rem; line-height: 1.42; white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.msg.them { align-self: flex-start; background: var(--bubble); color: var(--label); border-end-start-radius: 6px; }
+.msg.me { align-self: flex-end; background: var(--tint-fill); color: #FFFFFF; border-end-end-radius: 6px; }
+.msg.me.wrong { background: var(--red-fill); }
+.msg.pop-in { animation: bubble-in .42s var(--spring) both; transform-origin: bottom left; }
+.msg.me.pop-in { transform-origin: bottom right; }
+@keyframes bubble-in { from { opacity: 0; transform: translateY(8px) scale(.92); } }
+.msg.typing { display: inline-flex; gap: 4px; padding: 13px 16px; }
+.msg.typing i { width: 7px; height: 7px; border-radius: 4px; background: var(--label-3); animation: dot 1.2s var(--ease) infinite; }
+.msg.typing i:nth-child(2) { animation-delay: .15s; }
+.msg.typing i:nth-child(3) { animation-delay: .3s; }
+@keyframes dot { 0%, 60%, 100% { transform: none; opacity: .5; } 30% { transform: translateY(-4px); opacity: 1; } }
+.chat-note { align-self: center; margin: 6px 0; padding: 5px 12px; border-radius: 12px; background: var(--fill-3); font-size: .8125rem; font-weight: 600; color: var(--label-2); text-align: center; }
+.chat-note.pop-in { animation: row-in .4s var(--ease-out) both; }
+.stop-card {
+  margin: 4px 0; padding: 14px 16px; border-radius: 18px; background: var(--card); box-shadow: inset 0 0 0 2px var(--red), var(--card-ring);
+}
+.stop-card.pop-in { animation: stop-in .5s var(--spring) both; }
+@keyframes stop-in { from { opacity: 0; transform: scale(.94); } }
+.stop-title { display: flex; align-items: center; gap: 8px; font: 700 1.125rem/1.3 var(--display); color: var(--red-ink); }
+.stop-title .ms { font-size: 26px; color: var(--red); font-variation-settings: "FILL" 1, "wght" 500; }
+.stop-risk { margin: 6px 0 0; font-weight: 600; color: var(--red-ink); }
+.stop-lesson { margin: 6px 0 0; font-size: 1.0625rem; line-height: 1.45; }
+.stop-trick { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding-top: 12px; box-shadow: inset 0 .5px 0 var(--sep); }
+.stop-trick .trick-icon { width: 36px; height: 36px; border-radius: 10px; }
+.stop-trick .trick-icon .ms { font-size: 22px; }
+.stop-trick small { display: block; font-size: .75rem; font-weight: 600; color: var(--label-2); }
+.stop-trick b { font-size: 1rem; }
+.choices { display: grid; gap: 8px; padding: 6px 0 calc(16px + env(safe-area-inset-bottom)); }
+.choose { margin: 4px 4px 2px; font-size: .9375rem; font-weight: 600; color: var(--label-2); }
+.choice {
+  display: flex; align-items: flex-start; gap: 12px; width: 100%; min-height: 54px; padding: 13px 16px; border: 0; border-radius: 16px;
+  background: var(--card); color: var(--label); font-size: 1.0625rem; line-height: 1.38; text-align: start; box-shadow: var(--card-ring);
+  animation: row-in .42s var(--ease-out) both; animation-delay: calc(var(--k, 0) * 70ms);
+  transition: transform .2s var(--ease);
+}
+.choice:active { transform: scale(.98); background: var(--press); }
+.choice-n {
+  flex: none; display: grid; place-items: center; width: 24px; height: 24px; margin-top: 1px; border-radius: 12px;
+  background: var(--tint-soft); color: var(--tint-ink); font: 700 .8125rem/1 var(--font);
+}
+
+/* ---- the end of an episode */
+.stars-big { display: flex; justify-content: center; margin: 22px 0 4px; }
+.stars.big { gap: 6px; }
+.stars.big .ms { font-size: 64px; }
+.stars.big .on { animation: star-pop .7s var(--spring) both; }
+.stars.big .on:nth-child(2) { animation-delay: .25s; }
+.stars.big .on:nth-child(3) { animation-delay: .5s; }
+@keyframes star-pop { from { transform: scale(0) rotate(-60deg); opacity: 0; } to { transform: none; opacity: 1; } }
+section[data-screen="story-done"] { text-align: center; }
+section[data-screen="story-done"] .cta-row { margin-top: 22px; }
+.story-cards { display: grid; gap: 10px; margin-top: 18px; text-align: start; perspective: 800px; }
+.trick-card {
+  display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 18px; background: var(--card); box-shadow: var(--card-ring);
+  animation: card-deal .8s var(--ease-ios) both;
+}
+@keyframes card-deal { from { opacity: 0; transform: rotateY(-90deg) translateY(10px); } to { opacity: 1; transform: none; } }
+.trick-card small { display: block; font-size: .75rem; font-weight: 600; color: var(--purple-ink); }
+.trick-card b { display: block; font-size: 1.0625rem; }
+.trick-card p { margin: 4px 0 0; font-size: .9375rem; color: var(--label-2); line-height: 1.4; }
+.story-total { margin: 16px 8px 0; font-size: 1rem; font-weight: 600; color: var(--green-ink); font-variant-numeric: tabular-nums; }
 
 /* ================================================================ TEXT SIZE (set in Voice and text size) */
 :root[data-text-size="large"] main, :root[data-text-size="large"] .foot, :root[data-text-size="large"] .ticket-sheet { zoom: 1.12; }

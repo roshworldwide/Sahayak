@@ -89,9 +89,31 @@ def pack_strings() -> list[tuple[dict, str]]:
     return items
 
 
+def story_strings() -> list[tuple[dict, str]]:
+    """The second game's dialogue and trick cards (web/story.json): what scammers say, the replies, the lessons."""
+    items: list[tuple[dict, str]] = []
+
+    def walk(o, path):
+        if isinstance(o, dict):
+            if isinstance(o.get("en"), str) and isinstance(o.get("hi"), str):
+                items.append(({"en": o["en"], "hi": o["hi"]}, path))
+                return
+            for k, v in o.items():
+                walk(v, f"{path}.{k}")
+        elif isinstance(o, list):
+            for v in o:
+                walk(v, path)
+
+    story = json.loads((ROOT / "web" / "story.json").read_text(encoding="utf-8"))
+    for ep in story["episodes"]:
+        walk(ep, f"story.episode({ep['id']})")
+    walk(story["tricks"], "story.tricks")
+    return items
+
+
 def main() -> int:
     seen: dict[str, dict] = {}
-    for obj, where in pack_strings() + CODE_TEXT:
+    for obj, where in pack_strings() + CODE_TEXT + story_strings():
         en = obj["en"].strip()
         if not en:
             continue

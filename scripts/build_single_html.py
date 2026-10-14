@@ -43,7 +43,7 @@ def main() -> None:
         html = (site / "index.html").read_text(encoding="utf-8")
 
         # the files the app fetches by itself, served from inside the page
-        files = {"app/game.json": (app / "game.json").read_text(encoding="utf-8")}
+        files = {f"app/{n}": (app / n).read_text(encoding="utf-8") for n in ("game.json", "story.json")}
         for f in sorted((app / "i18n").glob("*.json")):
             files[f"app/i18n/{f.name}"] = f.read_text(encoding="utf-8")
         for f in sorted((site / "phone-packs").glob("*.json")):

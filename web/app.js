@@ -122,6 +122,16 @@
       game_private: "आपका स्कोर इसी फ़ोन पर रहता है। कुछ भी कहीं नहीं भेजा जाता।",
       level_up: "नया स्तर: {name}!", next_card: "अगला",
       appearance: "रंग-रूप", theme_auto: "अपने-आप", theme_light: "हल्का", theme_titanium: "सफ़ेद टाइटेनियम", theme_dark: "गहरा",
+      story_title: "ठग को हराओ", story_tile_sub: "असली जैसी ठगी वाली कॉल खेलें। क्या आप अपने पैसे बचा पाएँगे?",
+      story_sub: "ठगी की कॉल और चैट, ठीक वैसे जैसे सच में आती हैं। हर कदम पर अपना जवाब चुनें और अपने पैसे बचाएँ।",
+      story_ep: "भाग {n}", story_locked: "इसे खोलने के लिए पिछला भाग पूरा करें", story_money: "आपके खाते में",
+      story_typing: "लिख रहा है…", story_on_call: "कॉल चल रही है", story_on_video: "वीडियो कॉल", story_choose: "आप क्या करेंगे?",
+      story_stop: "रुकिए! ऐसे ही पैसे जाते हैं।", story_risk: "आपके ₹{amount} जा सकते हैं।", story_trick: "चाल", story_try: "फिर से चुनें",
+      story_see: "क्या हुआ, देखें", story_ended: "आपने बात खत्म कर दी। ठग के हाथ कुछ नहीं लगा।", story_won: "आपने ठग को हरा दिया!",
+      story_lost: "इस बार ठग जीत गया", story_lost_sub: "हर ठगी में वही कुछ चालें होती हैं, और अब आप उन्हें जानते हैं। फिर से खेलें।",
+      story_kept: "आपके ₹{amount} बच गए।", story_total: "ठगों से बचाए आपके पैसे: ₹{amount}", story_new_trick: "आपकी चाल-किताब का नया कार्ड",
+      story_next: "अगला भाग", story_again: "फिर खेलें", story_stars: "3 में से {n} सितारे", story_shields: "{n} ढाल बची हैं", story_you: "आप",
+      tricks_title: "चाल-किताब", tricks_count: "{total} में से {n} कार्ड", trick_locked: "यह कार्ड खोलने के लिए ऐसी चाल चलने वाले ठग को हराएँ।",
     },
     en: {
       node_pill: "Offline", node_pill_phone: "On phone · offline",
@@ -241,6 +251,16 @@
       game_private: "Your score stays on this phone. Nothing is sent anywhere.",
       level_up: "Level up: {name}!", next_card: "Next",
       appearance: "Appearance", theme_auto: "Automatic", theme_light: "Light", theme_titanium: "White Titanium", theme_dark: "Dark",
+      story_title: "Beat the scammer", story_tile_sub: "Play a real-looking scam call. Can you keep your money?",
+      story_sub: "Scam calls and chats, played out the way they really come. Choose your reply at each step and keep your money safe.",
+      story_ep: "Episode {n}", story_locked: "Finish the one before to open this", story_money: "In your account",
+      story_typing: "typing…", story_on_call: "On a call", story_on_video: "Video call", story_choose: "What do you do?",
+      story_stop: "Stop! This is how the money goes.", story_risk: "Your ₹{amount} could be gone.", story_trick: "The trick", story_try: "Choose again",
+      story_see: "See what happened", story_ended: "You ended it. The scammer got nothing.", story_won: "You beat the scammer!",
+      story_lost: "The scammer got through this time", story_lost_sub: "Every scam uses the same few tricks, and now you know them. Try again.",
+      story_kept: "You kept your ₹{amount}.", story_total: "Money you have kept from scammers: ₹{amount}", story_new_trick: "New card for your Trick Book",
+      story_next: "Next episode", story_again: "Play again", story_stars: "{n} of 3 stars", story_shields: "{n} shields left", story_you: "You",
+      tricks_title: "Trick Book", tricks_count: "{n} of {total} cards", trick_locked: "Beat a scammer who uses this trick to open this card.",
     },
   };
   // The language list's own note, in Hindi or English only (it describes every other language on the list).
@@ -439,17 +459,20 @@
     if (state.check) renderQRBox(state.check);
     renderLearn();
     if (game.round) { renderPlay(); if (!$('[data-screen="game-done"]').hidden) renderDone(); }
+    if (story && currentScreen === "story") renderStoryShell();
+    if (story && story.result && currentScreen === "story-done") renderStoryDone();
     updateNavTitle();
   }
 
   // ---------------------------------------------------------------- navigation
   // The tab each screen belongs to: the bar at the bottom shows where the person is.
   const TAB_OF = { home: "home", check: "check", result: "check", complaint: "check", benefits: "benefits", question: "benefits",
-    "benefits-result": "benefits", slip: "benefits", learn: "learn", play: "learn", "game-done": "learn" };
+    "benefits-result": "benefits", slip: "benefits", learn: "learn", play: "learn", "game-done": "learn", story: "learn",
+    "story-done": "learn" };
   // How deep each screen sits in its tab: going deeper pushes the new screen in from the side, as in iOS; coming
   // back pops it; changing tab cross-fades.
   const DEPTH = { home: 0, check: 0, benefits: 0, learn: 0, result: 1, complaint: 2, question: 1, "benefits-result": 2,
-    slip: 3, play: 1, "game-done": 2 };
+    slip: 3, play: 1, "game-done": 2, story: 1, "story-done": 2 };
   let currentScreen = "home";
   function markScreen(screen) {
     document.body.dataset.at = screen;  // not data-screen: that names the sections
@@ -553,6 +576,7 @@
     if (!sec) return null;
     if (currentScreen === "result") return $(".v-label", sec);
     if (currentScreen === "benefits-result") return $(".nav-summary .big", sec);
+    if (currentScreen === "story") return $("#story-from", sec);
     return $(".large-title, .screen-head h2, .play-q, .done-title, :scope > h2", sec);
   }
   function updateNavTitle() {
@@ -1805,7 +1829,8 @@
   const game = { cards: null, loading: null, round: null, state: loadGameState() };
 
   function loadGameState() {
-    const blank = { points: 0, rounds: 0, best: 0, streak: 0, lastDay: "", dailyDay: "", seen: [], right: {}, badges: [] };
+    const blank = { points: 0, rounds: 0, best: 0, streak: 0, lastDay: "", dailyDay: "", seen: [], right: {}, badges: [],
+      story: {}, tricks: [], saved: 0 };
     try { return { ...blank, ...(JSON.parse(localStorage.getItem(GAME_KEY)) || {}) }; } catch { return blank; }
   }
   function saveGame() { try { localStorage.setItem(GAME_KEY, JSON.stringify(game.state)); } catch { /* private mode */ } }
@@ -1830,9 +1855,11 @@
   function loadGame() {
     if (!game.loading) {
       game.loading = (async () => {
-        const [res] = await Promise.all([fetch(`${ROOT}app/game.json`), loadLocal()]);
-        if (!res.ok) throw new Error(`game: HTTP ${res.status}`);
+        const [res, storyRes] = await Promise.all([fetch(`${ROOT}app/game.json`), fetch(`${ROOT}app/story.json`), loadLocal()]);
+        if (!res.ok || !storyRes.ok) throw new Error(`game: HTTP ${res.status} ${storyRes.status}`);
         game.cards = (await res.json()).cards;
+        game.story = await storyRes.json();
+        renderLearn();
       })();
       game.loading.catch(() => { game.loading = null; });
     }
@@ -1910,6 +1937,8 @@
       el("span", { class: "badge-name" }, t(`badge_${id}`)),
       el("span", { class: "badge-prog" }, badgeLine(id)));
     }));
+    renderEpisodes();
+    renderTricks();
     // the points count up from what the person last saw here
     const shown = game.shownPoints ?? s.points;
     countUp($(".lc-points", $("#level-card")), s.points, { from: shown, format: (v) => `${v} ${t("points")}` });
@@ -2281,6 +2310,266 @@
     }
     location.href = `whatsapp://send?text=${encodeURIComponent(text)}`;
   });
+
+  // ---------------------------------------------------------------- Beat the scammer: the second game
+  // A scam is played out as it arrives: a call, an SMS, a WhatsApp chat, a video call (web/story.json). The scammer
+  // types and keeps pushing; the person picks a reply. A wrong reply stops the scene and shows how the money would
+  // go and which trick did it; three wrong replies and the scammer wins the episode. Each episode won adds its tricks
+  // to the Trick Book. The pull comes from the story, the stakes and the collection, never from guilt or an endless
+  // feed: every episode ends, and points come only for doing better than before.
+  const TRICK_ICON = { authority: "account_balance", urgency: "timer", otp: "password", fear: "warning", remote_app: "install_mobile",
+    fee: "currency_rupee", greed: "redeem", secrecy: "visibility_off", video_arrest: "videocam", emotion: "favorite",
+    qr_pin: "qr_code_2", fake_payment: "receipt_long" };
+  const CHANNEL_ICON = { call: "call", video: "videocam", sms: "sms", whatsapp: "chat" };
+  const rupees = (n) => { try { return new Intl.NumberFormat("en-IN").format(n); } catch { return String(n); } };
+  const pause = (ms) => new Promise((done) => setTimeout(done, reduceMotion() ? Math.min(ms, 120) : ms));
+  let story = null;
+  let callTimer = null;
+
+  const episodeStars = (id) => ((game.state.story || {})[id] || {}).stars || 0;
+  const episodeOpen = (i) => i === 0 || episodeStars(game.story.episodes[i - 1].id) > 0;
+  function starRow(n, cls) {
+    return el("span", { class: `stars${cls ? ` ${cls}` : ""}`, "aria-label": fmt(t("story_stars"), { n }) },
+      [0, 1, 2].map((k) => icon("star", k < n ? "on" : "off")));
+  }
+
+  function renderEpisodes() {
+    const box = $("#episodes");
+    if (!box) return;
+    if (!game.story) { box.replaceChildren(); return; }
+    box.replaceChildren(...game.story.episodes.map((ep, i) => {
+      const open = episodeOpen(i);
+      const stars = episodeStars(ep.id);
+      return el("button", { type: "button", class: `ep-row${open ? "" : " locked"}${stars ? " done" : ""}`, disabled: open ? null : true,
+        onclick: () => startStory(i) },
+      el("span", { class: `ep-num ch-${ep.channel}`, "aria-hidden": "true" }, open ? icon(CHANNEL_ICON[ep.channel]) : icon("lock")),
+      el("span", { class: "ep-text" },
+        el("span", { class: "ep-over" }, fmt(t("story_ep"), { n: i + 1 })),
+        el("span", { class: "ep-title" }, tr(ep.title)),
+        open ? starRow(stars) : el("span", { class: "ep-lock" }, t("story_locked"))),
+      open ? icon("chevron_right", "chev") : null);
+    }));
+    const saved = game.state.saved || 0;
+    $("#story-saved").hidden = !saved;
+    $("#story-saved").textContent = fmt(t("story_total"), { amount: rupees(saved) });
+  }
+
+  function renderTricks() {
+    const box = $("#tricks");
+    if (!box || !game.story) return;
+    const have = new Set(game.state.tricks || []);
+    const ids = Object.keys(game.story.tricks);
+    $("#tricks-count").textContent = fmt(t("tricks_count"), { n: ids.filter((id) => have.has(id)).length, total: ids.length });
+    box.replaceChildren(...ids.map((id) => {
+      const tk = game.story.tricks[id];
+      const open = have.has(id);
+      return el("button", { type: "button", class: `trick${open ? " open" : ""}`,
+        "aria-label": open ? `${tr(tk.name)}: ${tr(tk.how)}` : t("trick_locked"),
+        onclick: (e) => { replay(e.currentTarget, "flip"); toast(open ? `${tr(tk.name)}: ${tr(tk.how)}` : t("trick_locked"), open ? "award" : null); } },
+      el("span", { class: `trick-icon tk-${id}`, "aria-hidden": "true" }, icon(open ? TRICK_ICON[id] : "lock")),
+      el("span", { class: "trick-name" }, open ? tr(tk.name) : "?"));
+    }));
+  }
+
+  async function startStory(index) {
+    try { await loadGame(); } catch { toast(t("err_network")); return; }
+    const ep = game.story.episodes[index];
+    if (!ep || !episodeOpen(index)) return;
+    story = { index, ep, step: 0, shields: 3, mistakes: 0, log: [], wrong: new Set(), run: {}, started: Date.now(), waiting: null };
+    go("story", { dir: "push", render: renderStoryShell });
+    const run = story.run;
+    setTimeout(() => { if (story && story.run === run) playStep(); }, reduceMotion() ? 0 : 480);  // once the screen has arrived
+  }
+
+  function renderStoryShell() {
+    if (!story) return;
+    const ep = story.ep;
+    $("#story-avatar").className = `story-avatar ch-${ep.channel}`;
+    $("#story-avatar").replaceChildren(icon(CHANNEL_ICON[ep.channel]));
+    $("#story-from").textContent = tr(ep.from);
+    renderStatus();
+    clearInterval(callTimer);
+    if (ep.channel === "call" || ep.channel === "video") callTimer = setInterval(renderStatus, 1000);
+    renderShields();
+    renderBalance();
+    renderChatLog();
+    renderChoices();
+  }
+  function renderStatus() {
+    if (!story) { clearInterval(callTimer); return; }
+    const ch = story.ep.channel;
+    const secs = Math.floor((Date.now() - story.started) / 1000);
+    const clock = `${String(Math.floor(secs / 60)).padStart(2, "0")}:${String(secs % 60).padStart(2, "0")}`;
+    $("#story-status").textContent = ch === "call" ? `${t("story_on_call")} · ${clock}` : ch === "video" ? `${t("story_on_video")} · ${clock}`
+      : ch === "sms" ? t("card_sms") : "WhatsApp";
+  }
+  function renderShields() {
+    const box = $("#story-shields");
+    box.setAttribute("role", "img");
+    box.setAttribute("aria-label", fmt(t("story_shields"), { n: story.shields }));
+    box.replaceChildren(...[0, 1, 2].map((k) => icon("shield", k < story.shields ? "on" : "off")));
+  }
+  function renderBalance() {
+    $("#story-balance").replaceChildren(el("span", {}, t("story_money")), el("b", {}, `₹${rupees(story.ep.balance)}`));
+  }
+
+  // The chat is kept as a list, so it can be drawn again in another language.
+  function logEntry(entry, animate = true) {
+    story.log.push(entry);
+    const node = chatNode(entry, animate);
+    $("#story-chat").append(node);
+    node.scrollIntoView({ block: "end", behavior: reduceMotion() ? "auto" : "smooth" });
+    return node;
+  }
+  function renderChatLog() {
+    $("#story-chat").replaceChildren(...story.log.map((e) => chatNode(e, false)));
+  }
+  function chatNode(e, animate) {
+    const cls = animate ? " pop-in" : "";
+    if (e.who === "them") return el("div", { class: `msg them${cls}`, dir: "auto" }, tr(e.obj));
+    if (e.who === "me") return el("div", { class: `msg me${e.wrong ? " wrong" : ""}${cls}`, dir: "auto" }, tr(e.obj));
+    if (e.who === "note") return el("p", { class: `chat-note${cls}` }, t(e.key));
+    // a stopped scene: what the wrong reply would cost, and the trick behind it
+    const tk = game.story.tricks[e.trick];
+    return el("div", { class: `stop-card${cls}`, role: "alert" },
+      el("div", { class: "stop-title" }, icon("gpp_bad"), t("story_stop")),
+      el("p", { class: "stop-risk" }, fmt(t("story_risk"), { amount: rupees(story.ep.balance) })),
+      el("p", { class: "stop-lesson" }, tr(e.lesson)),
+      el("div", { class: "stop-trick" }, el("span", { class: `trick-icon tk-${e.trick}`, "aria-hidden": "true" }, icon(TRICK_ICON[e.trick])),
+        el("span", {}, el("small", {}, t("story_trick")), el("b", {}, tr(tk.name)))));
+  }
+
+  async function playStep() {
+    if (!story) return;
+    const run = story.run;
+    const step = story.ep.steps[story.step];
+    const typing = el("div", { class: "msg them typing", "aria-label": t("story_typing") }, el("i", {}), el("i", {}), el("i", {}));
+    $("#story-chat").append(typing);
+    typing.scrollIntoView({ block: "end", behavior: reduceMotion() ? "auto" : "smooth" });
+    await pause(Math.min(1700, 650 + tr(step.say).length * 9));
+    typing.remove();
+    if (!story || story.run !== run) return;
+    logEntry({ who: "them", obj: step.say });
+    vibrate(8);
+    if (voice.auto) speak(tr(step.say), state.lang);
+    await pause(380);
+    if (!story || story.run !== run) return;
+    story.waiting = shuffle(step.options);
+    renderChoices();
+  }
+
+  function renderChoices() {
+    const box = $("#story-choices");
+    if (!story || !story.waiting) { box.replaceChildren(); return; }
+    const opts = story.waiting.filter((o) => !story.wrong.has(o));
+    box.replaceChildren(el("p", { class: "choose" }, t("story_choose")),
+      ...opts.map((o, k) => el("button", { type: "button", class: "choice", style: null, onclick: () => choose(o) },
+        el("span", { class: "choice-n", "aria-hidden": "true" }, String(k + 1)), el("span", {}, tr(o.text)))));
+    if (!reduceMotion()) $$(".choice", box).forEach((b, k) => b.style.setProperty("--k", String(k)));
+  }
+
+  async function choose(opt) {
+    if (!story || !story.waiting) return;
+    const run = story.run;
+    const step = story.ep.steps[story.step];
+    story.waiting = null;
+    renderChoices();
+    if (opt.safe) {
+      logEntry({ who: "me", obj: opt.text });
+      vibrate(14);
+      if (story.step + 1 >= story.ep.steps.length) {
+        await pause(500);
+        if (!story || story.run !== run) return;
+        logEntry({ who: "note", key: "story_ended" });
+        edgeFlash("right");
+        await pause(1100);
+        if (story && story.run === run) finishStory(true);
+        return;
+      }
+      story.step += 1;
+      story.wrong = new Set();
+      await pause(350);
+      if (story && story.run === run) playStep();
+      return;
+    }
+    // a wrong reply: the scene stops, a shield is lost, and the person chooses again
+    logEntry({ who: "me", obj: opt.text, wrong: true });
+    story.mistakes += 1;
+    story.shields -= 1;
+    story.wrong.add(opt);
+    vibrate([40, 60, 40]);
+    edgeFlash("wrong");
+    replay($("#story-balance"), "hit");
+    renderShields();
+    replay($("#story-shields"), "hit");
+    await pause(420);
+    if (!story || story.run !== run) return;
+    logEntry({ who: "stop", lesson: opt.lesson, trick: step.trick });
+    if (voice.auto) speak(joinSpoken([t("story_stop"), tr(opt.lesson)]), state.lang);
+    const last = story.shields <= 0;
+    $("#story-choices").replaceChildren(el("button", { type: "button", class: last ? "primary big" : "tinted big",
+      onclick: () => { if (last) finishStory(false); else { story.waiting = step.options; renderChoices(); } } },
+    t(last ? "story_see" : "story_try")));
+  }
+
+  function finishStory(won) {
+    clearInterval(callTimer);
+    const s = game.state;
+    const ep = story.ep;
+    s.story = s.story || {};
+    s.tricks = s.tricks || [];
+    const before = episodeStars(ep.id);
+    const stars = won ? 3 - Math.min(2, story.mistakes) : 0;
+    const result = { won, stars, gain: 0, fresh: [], first: false, index: story.index };
+    if (won) {
+      result.fresh = [...new Set(ep.steps.map((st) => st.trick))].filter((id) => !s.tricks.includes(id));
+      s.tricks.push(...result.fresh);
+      if (!before) { s.saved = (s.saved || 0) + ep.balance; result.first = true; }
+      result.gain = Math.max(0, stars - before) * 10;  // points only for doing better than before
+      s.points += result.gain;
+      s.story[ep.id] = { stars: Math.max(before, stars) };
+      touchStreak();
+    }
+    saveGame();
+    story.result = result;
+    go("story-done", { focus: "#story-done-title", render: renderStoryDone });
+    if (won && stars === 3) setTimeout(confetti, 450);
+    vibrate(won ? [20, 40, 20, 40, 60] : [60, 40, 60]);
+  }
+
+  function renderStoryDone() {
+    if (!story || !story.result) return;
+    const r = story.result;
+    const ep = story.ep;
+    $("#story-stars").replaceChildren(starRow(r.stars, "big"));
+    $("#story-done-title").textContent = t(r.won ? "story_won" : "story_lost");
+    $("#story-done-sub").textContent = r.won ? `${fmt(t("story_kept"), { amount: rupees(ep.balance) })} ${tr(ep.win)}` : t("story_lost_sub");
+    const pts = $("#story-points");
+    pts.hidden = !r.gain;
+    if (r.gain) {
+      pts.replaceChildren(icon("star"), el("span", { class: "num" }, fmt(t("done_points"), { n: r.gain })));
+      countUp($("#story-points .num"), r.gain, { ms: 900, format: (v) => fmt(t("done_points"), { n: v }) });
+    }
+    $("#story-cards").replaceChildren(...r.fresh.map((id, k) => {
+      const tk = game.story.tricks[id];
+      const card = el("div", { class: "trick-card" },
+        el("span", { class: `trick-icon tk-${id}`, "aria-hidden": "true" }, icon(TRICK_ICON[id])),
+        el("div", {}, el("small", {}, t("story_new_trick")), el("b", {}, tr(tk.name)), el("p", {}, tr(tk.how))));
+      card.style.animationDelay = `${0.35 + k * 0.18}s`;
+      return card;
+    }));
+    const total = game.state.saved || 0;
+    $("#story-total").hidden = !total;
+    const line = $("#story-total");
+    if (r.first) countUp(line, total, { from: total - ep.balance, ms: 1300, format: (v) => fmt(t("story_total"), { amount: rupees(v) }) });
+    else line.textContent = fmt(t("story_total"), { amount: rupees(total) });
+    const next = game.story.episodes[r.index + 1];
+    $("#btn-story-next").hidden = !(r.won && next);
+  }
+
+  $("#btn-story-quit").addEventListener("click", () => { stopSpeaking(); clearInterval(callTimer); story = null; go("learn"); });
+  $("#btn-story-again").addEventListener("click", () => { if (story) startStory(story.index); });
+  $("#btn-story-next").addEventListener("click", () => { if (story) startStory(story.index + 1); });
 
   // ---------------------------------------------------------------- language, health, offline cache
   $("#lang-toggle").addEventListener("click", () => { openLangSheet(); });

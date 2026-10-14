@@ -1,0 +1,241 @@
+{
+ "note": "Beat the scammer: the second awareness game (web/app.js). Each episode plays out a scam the way it really arrives, built from publicly reported patterns. In each step one reply is safe and two are what people often do; a wrong reply shows how the money would go, and the trick behind it. The advice matches Sahayak's own: never share an OTP or PIN, never install an app or move money for a caller, check with the bank or family yourself, report on sancharsaathi.gov.in (Chakshu), and call 1930 if money was taken. No real person's name or number is used.",
+ "tricks": {
+  "authority": {"name": {"en": "Pretends to be official", "hi": "अफ़सर होने का ढोंग"},
+   "how": {"en": "They say they are from your bank, the police or the government. Real offices never ask for codes or money on a call.", "hi": "वे खुद को बैंक, पुलिस या सरकार का बताते हैं। असली दफ़्तर फ़ोन पर कभी कोड या पैसे नहीं माँगते।"}},
+  "urgency": {"name": {"en": "The rush", "hi": "जल्दबाज़ी"},
+   "how": {"en": "They rush you so you do not stop to think. A real problem can always wait until you check.", "hi": "वे जल्दी मचाते हैं ताकि आप सोच न सकें। असली मामला जाँचने तक हमेशा रुक सकता है।"}},
+  "otp": {"name": {"en": "Asks for a code", "hi": "कोड माँगना"},
+   "how": {"en": "An OTP or PIN is the key to your money. No bank, shop or office ever needs it from you.", "hi": "OTP या PIN आपके पैसों की चाबी है। किसी बैंक, दुकान या दफ़्तर को यह आपसे कभी नहीं चाहिए।"}},
+  "fear": {"name": {"en": "The threat", "hi": "डराना"},
+   "how": {"en": "Your account will close, the power will be cut, you will be arrested. Fear is used to stop you thinking.", "hi": "खाता बंद होगा, बिजली कटेगी, गिरफ़्तारी होगी। डर इसलिए दिखाया जाता है ताकि आप सोच न सकें।"}},
+  "remote_app": {"name": {"en": "Install this app", "hi": "यह ऐप डालो"},
+   "how": {"en": "A screen-sharing app lets them see your screen, read your OTPs and use your bank app. Never install an app a caller asks for.", "hi": "स्क्रीन दिखाने वाले ऐप से वे आपकी स्क्रीन देखते हैं, OTP पढ़ते हैं और बैंक ऐप चलाते हैं। कॉल करने वाले के कहने पर कोई ऐप न डालें।"}},
+  "fee": {"name": {"en": "Pay a little first", "hi": "पहले थोड़ा पैसा"},
+   "how": {"en": "A small fee to get a prize, a refund or to keep a service is the hook. After the first payment, they ask again.", "hi": "इनाम, रिफ़ंड या सेवा के नाम पर छोटी फ़ीस ही काँटा है। पहली बार पैसे देने के बाद वे फिर माँगते हैं।"}},
+  "greed": {"name": {"en": "Too good to be true", "hi": "लालच"},
+   "how": {"en": "A lottery you never entered, a huge prize, easy money. If it sounds too good, it is a trap.", "hi": "जिस लॉटरी में आपने हिस्सा ही नहीं लिया, बड़ा इनाम, आसान कमाई। जो बहुत अच्छा लगे, वह जाल है।"}},
+  "secrecy": {"name": {"en": "Do not tell anyone", "hi": "किसी को मत बताना"},
+   "how": {"en": "They tell you to keep it secret and stay on the call. Scammers fear your family and your bank, so tell them.", "hi": "वे कहते हैं बात छिपाओ और फ़ोन पर बने रहो। ठग आपके परिवार और बैंक से डरते हैं, इसलिए उन्हें बताएँ।"}},
+  "video_arrest": {"name": {"en": "Video \"arrest\"", "hi": "वीडियो पर \"गिरफ़्तारी\""},
+   "how": {"en": "Police never arrest anyone on a video call or keep them on camera. There is no \"digital arrest\": end the call.", "hi": "पुलिस कभी वीडियो कॉल पर किसी को गिरफ़्तार नहीं करती, न कैमरे पर बिठाए रखती है। \"डिजिटल अरेस्ट\" कुछ नहीं होता: कॉल काट दें।"}},
+  "emotion": {"name": {"en": "A loved one in trouble", "hi": "अपनों के नाम पर"},
+   "how": {"en": "\"It's me, I'm in trouble, this is my new number.\" Call your relative on their old number before you do anything.", "hi": "\"मैं हूँ, मुसीबत में हूँ, यह मेरा नया नंबर है।\" कुछ भी करने से पहले अपने रिश्तेदार को उनके पुराने नंबर पर फ़ोन करें।"}},
+  "qr_pin": {"name": {"en": "PIN to receive money", "hi": "पैसे पाने के लिए PIN"},
+   "how": {"en": "You never scan a QR or enter your UPI PIN to receive money. A PIN only ever sends money out.", "hi": "पैसे पाने के लिए कभी QR स्कैन या UPI PIN नहीं डालना पड़ता। PIN डालने से पैसे सिर्फ़ जाते हैं।"}},
+  "fake_payment": {"name": {"en": "The fake \"money sent\"", "hi": "नकली \"पैसे भेज दिए\""},
+   "how": {"en": "They show a fake payment message, then ask you to send back the \"extra\". Check your real bank balance, not their message.", "hi": "वे पैसे भेजने का नकली मैसेज दिखाकर \"ज़्यादा\" पैसे लौटाने को कहते हैं। उनका मैसेज नहीं, अपने बैंक का असली बैलेंस देखें।"}}
+ },
+ "episodes": [
+  {
+   "id": "bank_kyc", "channel": "call", "balance": 48250,
+   "title": {"en": "The bank's KYC call", "hi": "बैंक का KYC कॉल"},
+   "from": {"en": "SBI Customer Care", "hi": "SBI कस्टमर केयर"},
+   "win": {"en": "A bank never calls to ask for KYC codes. To update KYC, visit your branch or use the bank's own app.", "hi": "बैंक KYC के लिए फ़ोन करके कोड कभी नहीं माँगता। KYC के लिए अपनी शाखा जाएँ या बैंक का अपना ऐप इस्तेमाल करें।"},
+   "steps": [
+    {"trick": "authority",
+     "say": {"en": "Namaste, I am calling from the SBI head office. Your KYC has expired, so your account will be blocked today.", "hi": "नमस्ते, मैं SBI हेड ऑफ़िस से बोल रहा हूँ। आपका KYC खत्म हो गया है, इसलिए आज आपका खाता बंद हो जाएगा।"},
+     "options": [
+      {"text": {"en": "Oh no! Please help me, sir.", "hi": "अरे! सर, मेरी मदद कीजिए।"},
+       "lesson": {"en": "Asking the caller for help hands them control. A bank never blocks an account over a phone call.", "hi": "फ़ोन करने वाले से मदद माँगना उसे काबू दे देता है। बैंक फ़ोन पर कभी खाता बंद नहीं करता।"}},
+      {"text": {"en": "I will go to my branch and check myself.", "hi": "मैं खुद अपनी शाखा जाकर पता करूँगा।"}, "safe": true},
+      {"text": {"en": "What do I need to do?", "hi": "मुझे क्या करना होगा?"},
+       "lesson": {"en": "The moment you ask what to do, they start giving orders. Say you will check with your branch, and stop.", "hi": "जैसे ही आप पूछते हैं कि क्या करें, वे हुक्म देने लगते हैं। कहिए कि आप शाखा से पता करेंगे, और बात खत्म कीजिए।"}}
+     ]},
+    {"trick": "urgency",
+     "say": {"en": "There is no time to go to the branch. In 10 minutes the account closes and your money will be stuck.", "hi": "शाखा जाने का समय नहीं है। 10 मिनट में खाता बंद हो जाएगा और आपके पैसे फँस जाएँगे।"},
+     "options": [
+      {"text": {"en": "Okay, I don't want my money stuck. Do it quickly.", "hi": "ठीक है, मेरे पैसे नहीं फँसने चाहिए। जल्दी कीजिए।"},
+       "lesson": {"en": "They rush you so you do not stop and think. A real problem can always wait until you check.", "hi": "वे जल्दी इसलिए मचाते हैं ताकि आप रुककर सोच न सकें। असली मामला जाँचने तक हमेशा रुक सकता है।"}},
+      {"text": {"en": "Please give me 10 more minutes to think.", "hi": "सोचने के लिए मुझे 10 मिनट और दीजिए।"},
+       "lesson": {"en": "Asking them for time keeps you on their call. You need nothing from them: just end the call.", "hi": "उनसे समय माँगना आपको उनकी कॉल पर बनाए रखता है। आपको उनसे कुछ नहीं चाहिए: बस कॉल काट दें।"}},
+      {"text": {"en": "If it is real, it can wait. I am going to the branch.", "hi": "अगर यह सच है, तो रुक सकता है। मैं शाखा जा रहा हूँ।"}, "safe": true}
+     ]},
+    {"trick": "otp",
+     "say": {"en": "I have sent a code to your phone to update the KYC. Just read me the 6 digits.", "hi": "KYC अपडेट करने के लिए मैंने आपके फ़ोन पर एक कोड भेजा है। बस मुझे वो 6 अंक बता दीजिए।"},
+     "options": [
+      {"text": {"en": "No. I never share an OTP. I am hanging up.", "hi": "नहीं। मैं OTP कभी नहीं बताता। मैं फ़ोन रख रहा हूँ।"}, "safe": true},
+      {"text": {"en": "It says 4 8 2 9 1 0.", "hi": "उसमें 4 8 2 9 1 0 लिखा है।"},
+       "lesson": {"en": "With the OTP they can empty your account in seconds. No bank ever asks for it.", "hi": "OTP से वे कुछ ही सेकंड में आपका खाता खाली कर सकते हैं। कोई बैंक इसे कभी नहीं माँगता।"}},
+      {"text": {"en": "I will tell you only the first 3 digits.", "hi": "मैं सिर्फ़ पहले 3 अंक बताऊँगा।"},
+       "lesson": {"en": "Even part of a code helps them. Never read out any OTP, PIN or password.", "hi": "कोड का एक हिस्सा भी उनके काम आता है। कोई भी OTP, PIN या पासवर्ड कभी न बताएँ।"}}
+     ]}
+   ]
+  },
+  {
+   "id": "power_cut", "channel": "sms", "balance": 22600,
+   "title": {"en": "Power cut tonight", "hi": "आज रात बिजली कटेगी"},
+   "from": {"en": "Electricity Office", "hi": "बिजली दफ़्तर"},
+   "win": {"en": "Power companies never cut supply over an SMS, and never ask you to install an app. Check your bill in the official app or at the office.", "hi": "बिजली कंपनी SMS भेजकर बिजली नहीं काटती, न ऐप डालने को कहती है। बिल सरकारी ऐप में या दफ़्तर पर ही जाँचें।"},
+   "steps": [
+    {"trick": "fear",
+     "say": {"en": "Dear customer, your electricity will be cut tonight at 9:30 pm because your last bill is not updated. Call our officer on this number at once.", "hi": "प्रिय ग्राहक, आपका पिछला बिल अपडेट नहीं है, इसलिए आज रात 9:30 बजे आपकी बिजली काट दी जाएगी। तुरंत इस नंबर पर हमारे अफ़सर से बात करें।"},
+     "options": [
+      {"text": {"en": "I'll call the number in the message.", "hi": "मैं मैसेज वाले नंबर पर फ़ोन करता हूँ।"},
+       "lesson": {"en": "The number in a scam message goes straight to the scammer. Use the number printed on your paper bill.", "hi": "ठगी वाले मैसेज का नंबर सीधे ठग के पास जाता है। अपने कागज़ वाले बिल पर छपा नंबर इस्तेमाल करें।"}},
+      {"text": {"en": "Reply: \"Please don't cut my power.\"", "hi": "जवाब दूँ: \"कृपया मेरी बिजली मत काटिए।\""},
+       "lesson": {"en": "A reply tells them your number is in use, and they start working on you. Real notices do not come as late-night SMS.", "hi": "जवाब देने से उन्हें पता चलता है कि नंबर चालू है, और वे आपके पीछे पड़ जाते हैं। असली नोटिस रात में SMS से नहीं आते।"}},
+      {"text": {"en": "My bill is paid. I will check it in the official app.", "hi": "मेरा बिल भरा हुआ है। मैं सरकारी ऐप में खुद देखूँगा।"}, "safe": true}
+     ]},
+    {"trick": "remote_app",
+     "say": {"en": "To update your bill, install the support app from this link. Our officer will fix it from his side in 2 minutes.", "hi": "बिल अपडेट करने के लिए इस लिंक से सपोर्ट ऐप डालिए। हमारे अफ़सर 2 मिनट में अपनी तरफ़ से ठीक कर देंगे।"},
+     "options": [
+      {"text": {"en": "I will not install any app. I will pay at the counter.", "hi": "मैं कोई ऐप नहीं डालूँगा। मैं काउंटर पर जाकर भरूँगा।"}, "safe": true},
+      {"text": {"en": "Okay, it is installing now.", "hi": "ठीक है, ऐप डल रहा है।"},
+       "lesson": {"en": "A screen-sharing app lets them see your screen, read your OTPs and use your bank app. Never install an app they send.", "hi": "स्क्रीन दिखाने वाले ऐप से वे आपकी स्क्रीन देखते हैं, OTP पढ़ते हैं और बैंक ऐप चलाते हैं। उनका भेजा कोई ऐप कभी न डालें।"}},
+      {"text": {"en": "Send the link on WhatsApp instead.", "hi": "लिंक WhatsApp पर भेज दीजिए।"},
+       "lesson": {"en": "A link from them is the same trap on another app. Never open a link or install an app a stranger sends.", "hi": "उनका लिंक किसी भी ऐप पर हो, वही जाल है। अनजान का भेजा लिंक कभी न खोलें, न ऐप डालें।"}}
+     ]},
+    {"trick": "fee",
+     "say": {"en": "Then pay just ₹10 now to keep the power on. Enter your card number on the page I sent.", "hi": "तो बिजली चालू रखने के लिए अभी बस ₹10 भर दीजिए। मेरे भेजे पेज पर अपना कार्ड नंबर डालिए।"},
+     "options": [
+      {"text": {"en": "It's only ₹10. Okay.", "hi": "सिर्फ़ ₹10 हैं। ठीक है।"},
+       "lesson": {"en": "The ₹10 page steals your card details, and then they take much more. A small fee is the hook.", "hi": "₹10 वाला पेज आपके कार्ड की जानकारी चुरा लेता है, फिर वे बहुत ज़्यादा ले लेते हैं। छोटी फ़ीस ही काँटा है।"}},
+      {"text": {"en": "No. I am stopping here and checking my bill myself.", "hi": "नहीं। मैं यहीं रुकता हूँ और अपना बिल खुद देखता हूँ।"}, "safe": true},
+      {"text": {"en": "I'll pay the ₹10 by UPI instead.", "hi": "मैं ₹10 UPI से भर देता हूँ।"},
+       "lesson": {"en": "Any payment to them opens the door. Pay bills only in the official app or at the counter.", "hi": "उन्हें कोई भी भुगतान दरवाज़ा खोल देता है। बिल सिर्फ़ सरकारी ऐप या काउंटर पर भरें।"}}
+     ]}
+   ]
+  },
+  {
+   "id": "lottery", "channel": "whatsapp", "balance": 15000,
+   "title": {"en": "You won ₹25 lakh!", "hi": "आपने ₹25 लाख जीते!"},
+   "from": {"en": "Lucky Draw Office", "hi": "लकी ड्रॉ दफ़्तर"},
+   "win": {"en": "You cannot win a draw you never entered, and a real prize never asks for a fee.", "hi": "जिस ड्रॉ में आपने हिस्सा ही नहीं लिया, उसे आप जीत नहीं सकते। असली इनाम कभी फ़ीस नहीं माँगता।"},
+   "steps": [
+    {"trick": "greed",
+     "say": {"en": "Congratulations! Your mobile number has won ₹25 lakh in our lucky draw. Reply YES to claim your prize.", "hi": "बधाई हो! आपके मोबाइल नंबर ने हमारे लकी ड्रॉ में ₹25 लाख जीते हैं। इनाम पाने के लिए YES लिखकर भेजें।"},
+     "options": [
+      {"text": {"en": "YES! How do I get it?", "hi": "YES! इसे कैसे पाऊँ?"},
+       "lesson": {"en": "You cannot win a draw you never entered. A huge prize out of nowhere is bait.", "hi": "जिस ड्रॉ में आपने हिस्सा नहीं लिया, उसे आप जीत नहीं सकते। अचानक बड़ा इनाम चारा है।"}},
+      {"text": {"en": "I never entered any lucky draw. This is a scam.", "hi": "मैंने किसी लकी ड्रॉ में हिस्सा नहीं लिया। यह ठगी है।"}, "safe": true},
+      {"text": {"en": "Is it real? Send me some proof.", "hi": "क्या यह सच है? कोई सबूत भेजिए।"},
+       "lesson": {"en": "They will send fake proof: photos, stamps, a \"certificate\". Any proof from them is part of the trick.", "hi": "वे नकली सबूत भेजेंगे: फ़ोटो, मोहर, \"सर्टिफ़िकेट\"। उनका हर सबूत चाल का ही हिस्सा है।"}}
+     ]},
+    {"trick": "fee",
+     "say": {"en": "To release your ₹25 lakh, first pay the processing and GST fee of ₹12,500 to our UPI ID.", "hi": "आपके ₹25 लाख जारी करने के लिए पहले ₹12,500 प्रोसेसिंग और GST फ़ीस हमारी UPI ID पर भेजें।"},
+     "options": [
+      {"text": {"en": "A real prize never asks for a fee. I am blocking you.", "hi": "असली इनाम कभी फ़ीस नहीं माँगता। मैं आपको ब्लॉक कर रहा हूँ।"}, "safe": true},
+      {"text": {"en": "Okay, ₹12,500 to get ₹25 lakh is fine.", "hi": "ठीक है, ₹25 लाख के लिए ₹12,500 ठीक है।"},
+       "lesson": {"en": "A real prize never asks you to pay first. Once you pay, they ask again, and again.", "hi": "असली इनाम पहले पैसे नहीं माँगता। एक बार भरेंगे तो वे फिर माँगेंगे, बार-बार।"}},
+      {"text": {"en": "Can you cut the fee from the prize money?", "hi": "क्या फ़ीस इनाम में से काट सकते हैं?"},
+       "lesson": {"en": "There is no prize, so there is nothing to cut the fee from. Bargaining only keeps you talking to them.", "hi": "इनाम है ही नहीं, तो उसमें से कुछ कटेगा भी नहीं। मोलभाव आपको बस उनसे बात करते रहने में फँसाता है।"}}
+     ]},
+    {"trick": "secrecy",
+     "say": {"en": "Do not tell your family yet, or the prize will be cancelled. This offer is only for you.", "hi": "अभी परिवार को मत बताना, वरना इनाम रद्द हो जाएगा। यह ऑफ़र सिर्फ़ आपके लिए है।"},
+     "options": [
+      {"text": {"en": "Okay, I will keep it secret.", "hi": "ठीक है, मैं किसी को नहीं बताऊँगा।"},
+       "lesson": {"en": "Secrecy is their shield. The moment you tell your family or your bank, the scam falls apart.", "hi": "छिपाना ही उनकी ढाल है। जैसे ही आप परिवार या बैंक को बताते हैं, ठगी टूट जाती है।"}},
+      {"text": {"en": "Why does it have to be a secret?", "hi": "इसे छिपाना क्यों है?"},
+       "lesson": {"en": "They will make up a reason. Any \"keep it secret\" is a sign to tell someone at once.", "hi": "वे कोई बहाना बना देंगे। \"किसी को मत बताना\" सुनते ही तुरंत किसी को बताएँ।"}},
+      {"text": {"en": "I am telling my family right now, and reporting this number.", "hi": "मैं अभी परिवार को बता रहा हूँ, और इस नंबर की शिकायत कर रहा हूँ।"}, "safe": true}
+     ]}
+   ]
+  },
+  {
+   "id": "video_arrest", "channel": "video", "balance": 340000,
+   "title": {"en": "The police video call", "hi": "पुलिस का वीडियो कॉल"},
+   "from": {"en": "\"Inspector\", Mumbai Police", "hi": "\"इंस्पेक्टर\", मुंबई पुलिस"},
+   "win": {"en": "Police never arrest anyone on a video call, and nobody official ever asks you to move money. If money was taken, call 1930 at once.", "hi": "पुलिस कभी वीडियो कॉल पर गिरफ़्तार नहीं करती, और कोई भी अफ़सर पैसे दूसरी जगह भेजने को नहीं कहता। पैसे गए हों तो तुरंत 1930 पर फ़ोन करें।"},
+   "steps": [
+    {"trick": "fear",
+     "say": {"en": "This is Mumbai Police. A parcel in your name has drugs and fake passports. A case has been filed against you.", "hi": "मैं मुंबई पुलिस से बोल रहा हूँ। आपके नाम के पार्सल में ड्रग्स और नकली पासपोर्ट मिले हैं। आप पर केस दर्ज हो गया है।"},
+     "options": [
+      {"text": {"en": "That's not mine! What should I do?", "hi": "वो मेरा नहीं है! मैं क्या करूँ?"},
+       "lesson": {"en": "Panic is their plan. Police do not call about parcels; they send a written notice.", "hi": "घबराहट ही उनकी योजना है। पुलिस पार्सल के बारे में फ़ोन नहीं करती; लिखित नोटिस भेजती है।"}},
+      {"text": {"en": "Police do not file cases on a video call. I am ending this call.", "hi": "पुलिस वीडियो कॉल पर केस नहीं करती। मैं यह कॉल काट रहा हूँ।"}, "safe": true},
+      {"text": {"en": "Let me show you my Aadhaar to prove who I am.", "hi": "मैं अपना आधार दिखाता हूँ ताकि पता चले मैं कौन हूँ।"},
+       "lesson": {"en": "Your ID helps them scare you more, and open accounts in your name. Never show your ID to a caller.", "hi": "आपका पहचान-पत्र उन्हें और डराने और आपके नाम पर खाते खोलने में काम आता है। कॉल करने वाले को कभी पहचान-पत्र न दिखाएँ।"}}
+     ]},
+    {"trick": "video_arrest",
+     "say": {"en": "You are under digital arrest. Stay on this video call. If you cut the call, police will come to your house.", "hi": "आप डिजिटल अरेस्ट में हैं। इसी वीडियो कॉल पर बने रहिए। कॉल काटी तो पुलिस आपके घर आ जाएगी।"},
+     "options": [
+      {"text": {"en": "Okay, I won't cut the call.", "hi": "ठीक है, मैं कॉल नहीं काटूँगा।"},
+       "lesson": {"en": "There is no \"digital arrest\". Police never keep anyone on a video call. Cut the call: nobody will come.", "hi": "\"डिजिटल अरेस्ट\" कुछ नहीं होता। पुलिस किसी को वीडियो कॉल पर नहीं बिठाती। कॉल काटें: कोई नहीं आएगा।"}},
+      {"text": {"en": "Please, I am old. Let me go.", "hi": "कृपया, मैं बूढ़ा हूँ। मुझे जाने दीजिए।"},
+       "lesson": {"en": "You do not need their permission. You can end the call at any moment.", "hi": "आपको उनकी इजाज़त नहीं चाहिए। आप कभी भी कॉल काट सकते हैं।"}},
+      {"text": {"en": "There is no such thing as digital arrest. I am cutting the call.", "hi": "डिजिटल अरेस्ट जैसा कुछ नहीं होता। मैं कॉल काट रहा हूँ।"}, "safe": true}
+     ]},
+    {"trick": "secrecy",
+     "say": {"en": "Do not tell your children. To clear your name, move your savings to this RBI safe account. You will get it back after checks.", "hi": "अपने बच्चों को मत बताना। अपना नाम साफ़ करने के लिए अपनी बचत इस RBI सेफ़ खाते में डालिए। जाँच के बाद वापस मिल जाएगी।"},
+     "options": [
+      {"text": {"en": "RBI has no \"safe account\". I am calling my son now.", "hi": "RBI का कोई \"सेफ़ खाता\" नहीं होता। मैं अभी अपने बेटे को फ़ोन कर रहा हूँ।"}, "safe": true},
+      {"text": {"en": "Okay, I will move it to clear my name.", "hi": "ठीक है, नाम साफ़ करने के लिए मैं पैसे भेज देता हूँ।"},
+       "lesson": {"en": "Money sent to a \"safe account\" is gone. No police or RBI officer ever asks you to move money.", "hi": "\"सेफ़ खाते\" में भेजा पैसा चला जाता है। कोई पुलिस या RBI अफ़सर कभी पैसे भेजने को नहीं कहता।"}},
+      {"text": {"en": "I will send half now and half later.", "hi": "आधे अभी भेजता हूँ, आधे बाद में।"},
+       "lesson": {"en": "Any transfer is a loss. Real officers never ask for money at all.", "hi": "कोई भी भुगतान नुकसान है। असली अफ़सर पैसे माँगते ही नहीं।"}}
+     ]}
+   ]
+  },
+  {
+   "id": "family", "channel": "whatsapp", "balance": 31500,
+   "title": {"en": "\"Mummy, it's me\"", "hi": "\"माँ, मैं हूँ\""},
+   "from": {"en": "Unknown number", "hi": "अनजान नंबर"},
+   "win": {"en": "When a \"relative\" writes from a new number, call their old number before anything else.", "hi": "जब कोई \"रिश्तेदार\" नए नंबर से लिखे, तो कुछ भी करने से पहले उनके पुराने नंबर पर फ़ोन करें।"},
+   "steps": [
+    {"trick": "emotion",
+     "say": {"en": "Mummy, it's me. My phone broke, this is my new number. Don't call the old one, it is switched off.", "hi": "माँ, मैं हूँ। मेरा फ़ोन टूट गया, यह मेरा नया नंबर है। पुराने पर फ़ोन मत करना, वो बंद है।"},
+     "options": [
+      {"text": {"en": "I'll call your old number first to check it's you.", "hi": "पहले मैं तुम्हारे पुराने नंबर पर फ़ोन करके देखती हूँ कि तुम ही हो।"}, "safe": true},
+      {"text": {"en": "Okay beta, I'll save this new number.", "hi": "ठीक है बेटा, यह नया नंबर सेव कर लेती हूँ।"},
+       "lesson": {"en": "Saving it lets them pose as your child again and again. Check first, on the old number.", "hi": "सेव करने से वे बार-बार आपके बच्चे बनकर बात करेंगे। पहले पुराने नंबर पर पता करें।"}},
+      {"text": {"en": "Beta! Are you okay? What happened?", "hi": "बेटा! तुम ठीक हो? क्या हुआ?"},
+       "lesson": {"en": "Worry makes us answer fast. Scammers copy names and photos from social media. Check on the old number first.", "hi": "चिंता में हम जल्दी जवाब देते हैं। ठग सोशल मीडिया से नाम और फ़ोटो उठा लेते हैं। पहले पुराने नंबर पर पता करें।"}}
+     ]},
+    {"trick": "urgency",
+     "say": {"en": "I had an accident. I need ₹18,000 for the hospital right now. I will return it tonight, please.", "hi": "मेरा एक्सीडेंट हो गया है। अस्पताल के लिए अभी ₹18,000 चाहिए। आज रात लौटा दूँगा, प्लीज़।"},
+     "options": [
+      {"text": {"en": "Send me the details, I'll pay now.", "hi": "डिटेल भेजो, मैं अभी भेजती हूँ।"},
+       "lesson": {"en": "A family emergency from a new number is the most common trick of all. Call your child or a relative before paying anything.", "hi": "नए नंबर से परिवार की इमरजेंसी सबसे आम चाल है। कुछ भी भेजने से पहले बच्चे या किसी रिश्तेदार को फ़ोन करें।"}},
+      {"text": {"en": "Send me a voice note first.", "hi": "पहले एक वॉइस मैसेज भेजो।"},
+       "lesson": {"en": "Voices can now be copied by computer. A voice note proves nothing: call the old number.", "hi": "अब कंप्यूटर से आवाज़ की नकल हो जाती है। वॉइस मैसेज से कुछ साबित नहीं होता: पुराने नंबर पर फ़ोन करें।"}},
+      {"text": {"en": "I will not send money until I talk to you on your old number.", "hi": "जब तक पुराने नंबर पर तुमसे बात नहीं होती, मैं पैसे नहीं भेजूँगी।"}, "safe": true}
+     ]},
+    {"trick": "secrecy",
+     "say": {"en": "Please don't tell Papa, he will be angry. Just send it quietly.", "hi": "प्लीज़ पापा को मत बताना, वो गुस्सा होंगे। चुपचाप भेज दो।"},
+     "options": [
+      {"text": {"en": "I'll send half now, quietly.", "hi": "आधे अभी चुपचाप भेज देती हूँ।"},
+       "lesson": {"en": "Even half is gone for good. Check first, every time.", "hi": "आधे पैसे भी हमेशा के लिए चले जाते हैं। हर बार पहले पता करें।"}},
+      {"text": {"en": "I am calling Papa right now.", "hi": "मैं अभी पापा को फ़ोन कर रही हूँ।"}, "safe": true},
+      {"text": {"en": "Okay, it will stay between us.", "hi": "ठीक है, बात हम दोनों के बीच रहेगी।"},
+       "lesson": {"en": "\"Don't tell anyone\" is the warning sign. Tell your family: if it is real, they will help.", "hi": "\"किसी को मत बताना\" ही खतरे का निशान है। परिवार को बताएँ: सच होगा तो वे मदद करेंगे।"}}
+     ]}
+   ]
+  },
+  {
+   "id": "sofa", "channel": "whatsapp", "balance": 26800,
+   "title": {"en": "Selling my old sofa", "hi": "पुराना सोफ़ा बेचना"},
+   "from": {"en": "Buyer (\"Army officer\")", "hi": "ख़रीदार (\"फ़ौजी अफ़सर\")"},
+   "win": {"en": "To receive money you never scan a QR or enter a PIN. Always check your real bank balance before you believe a payment.", "hi": "पैसे पाने के लिए कभी QR स्कैन या PIN नहीं डालना पड़ता। किसी भुगतान पर भरोसा करने से पहले अपने बैंक का असली बैलेंस देखें।"},
+   "steps": [
+    {"trick": "authority",
+     "say": {"en": "I am an Army officer, posted far away. I will buy your sofa for ₹8,000 without seeing it. My driver will pick it up.", "hi": "मैं फ़ौज में अफ़सर हूँ, दूर पोस्टिंग है। बिना देखे आपका सोफ़ा ₹8,000 में ले लूँगा। मेरा ड्राइवर आकर ले जाएगा।"},
+     "options": [
+      {"text": {"en": "Sure sir, I trust Army people.", "hi": "ज़रूर सर, फ़ौजियों पर मुझे भरोसा है।"},
+       "lesson": {"en": "Scammers pose as Army officers to win trust fast. A uniform photo proves nothing.", "hi": "ठग जल्दी भरोसा जीतने के लिए फ़ौजी बन जाते हैं। वर्दी वाली फ़ोटो से कुछ साबित नहीं होता।"}},
+      {"text": {"en": "Fine. The sofa goes only after the money is in my bank.", "hi": "ठीक है। पैसे मेरे बैंक में आने के बाद ही सोफ़ा जाएगा।"}, "safe": true},
+      {"text": {"en": "Send me a photo of your ID card first.", "hi": "पहले अपने पहचान-पत्र की फ़ोटो भेजिए।"},
+       "lesson": {"en": "A fake ID card is easy to send. Their ID does not make the deal safe; only money in your bank does.", "hi": "नकली पहचान-पत्र भेजना आसान है। उनके पहचान-पत्र से सौदा सुरक्षित नहीं होता; सिर्फ़ बैंक में आया पैसा ही सच है।"}}
+     ]},
+    {"trick": "qr_pin",
+     "say": {"en": "I am sending you a QR code. Scan it and enter your UPI PIN to receive the ₹8,000.", "hi": "मैं आपको एक QR कोड भेज रहा हूँ। ₹8,000 पाने के लिए उसे स्कैन करके अपना UPI PIN डालिए।"},
+     "options": [
+      {"text": {"en": "Okay, scanning it and entering my PIN.", "hi": "ठीक है, स्कैन करके PIN डाल रहा हूँ।"},
+       "lesson": {"en": "Scanning a QR and entering your PIN sends money out of your account. To receive money you never enter a PIN.", "hi": "QR स्कैन करके PIN डालने से पैसे आपके खाते से चले जाते हैं। पैसे पाने के लिए कभी PIN नहीं डालना पड़ता।"}},
+      {"text": {"en": "To receive money I never need a PIN. Send it to my UPI ID.", "hi": "पैसे पाने के लिए PIN की ज़रूरत नहीं होती। मेरी UPI ID पर भेजिए।"}, "safe": true},
+      {"text": {"en": "The QR is not working. Send another one.", "hi": "QR काम नहीं कर रहा। दूसरा भेजिए।"},
+       "lesson": {"en": "Every QR they send takes money out. Do not scan any of them.", "hi": "उनका भेजा हर QR पैसे निकालता है। किसी को भी स्कैन न करें।"}}
+     ]},
+    {"trick": "fake_payment",
+     "say": {"en": "Oh no, I sent ₹80,000 by mistake instead of ₹8,000! Please send back ₹72,000 quickly, it is my salary.", "hi": "अरे, गलती से ₹8,000 की जगह ₹80,000 चले गए! प्लीज़ जल्दी ₹72,000 लौटा दीजिए, मेरी तनख्वाह है।"},
+     "options": [
+      {"text": {"en": "Oh, sorry! I will send back the extra.", "hi": "अरे, माफ़ कीजिए! मैं ज़्यादा वाले लौटा देता हूँ।"},
+       "lesson": {"en": "The \"payment\" was a fake SMS or screenshot. Check your real balance in your bank app before anything.", "hi": "वो \"भुगतान\" नकली SMS या स्क्रीनशॉट था। कुछ भी करने से पहले बैंक ऐप में असली बैलेंस देखें।"}},
+      {"text": {"en": "I will return it by scanning your QR.", "hi": "आपका QR स्कैन करके लौटा देता हूँ।"},
+       "lesson": {"en": "Scanning their QR sends your own money. Your real balance would show that nothing came in.", "hi": "उनका QR स्कैन करने से आपके अपने पैसे जाते हैं। असली बैलेंस देखेंगे तो पता चलेगा कि कुछ आया ही नहीं।"}},
+      {"text": {"en": "I checked my bank balance. Nothing came, so I send nothing.", "hi": "मैंने बैंक बैलेंस देखा। कुछ नहीं आया, तो मैं कुछ नहीं भेजूँगा।"}, "safe": true}
+     ]}
+   ]
+  }
+ ]
+}
